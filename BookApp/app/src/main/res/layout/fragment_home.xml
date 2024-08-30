@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back01"
+    tools:context=".ui.home.presentation.HomeFragment">
+
+
+    <LinearLayout
+        android:id="@+id/texts"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/shape_toolbar02"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:text="@string/dashboard_admin"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/userEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:text="@string/dashboard_admin"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:backgroundTint="@color/purple_500"
+        android:src="@drawable/ic_logout_white"
+        app:layout_constraintBottom_toBottomOf="@id/texts"
+        app:layout_constraintEnd_toEndOf="@id/texts"
+        app:layout_constraintTop_toTopOf="@id/texts" />
+
+    <EditText
+        android:id="@+id/search_category"
+        style="@style/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:background="@color/white"
+        android:drawableStart="@drawable/ic_search_gray"
+        android:drawablePadding="@dimen/_5sdp"
+        android:hint="@string/search"
+        android:padding="@dimen/_10sdp"
+        android:textColor="@color/gray02"
+        android:textColorHint="@color/gray01"
+        app:layout_constraintTop_toBottomOf="@id/texts" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/category_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/add_category"
+        app:layout_constraintTop_toBottomOf="@id/search_category"
+        tools:listitem="@layout/category_item" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/add_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_65sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:backgroundTint="@color/purple_500"
+        android:paddingVertical="@dimen/_15sdp"
+        android:text="@string/add_category"
+        app:cornerRadius="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/add_pdf_category"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_55sdp"
+        android:backgroundTint="@color/purple_500"
+        android:drawableEnd="@drawable/ic_pdf_add_white"
+        android:paddingHorizontal="@dimen/_16ssp"
+        android:src="@drawable/ic_pdf_add_white"
+        android:tint="@color/white"
+        app:cornerRadius="@dimen/_25sdp"
+        app:layout_constraintBottom_toBottomOf="@id/add_category"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/add_category"
+        app:layout_constraintTop_toTopOf="@id/add_category"
+
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

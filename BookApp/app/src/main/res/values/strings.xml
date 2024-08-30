@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Book App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome">Welcome to Book App</string>
+    <string name="login">LOGIN</string>
+    <string name="continue_without_login">CONTINUE WITHOUT LOGIN</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="not_have_account_sign_up">Not have Account? Sign Up</string>
+    <string name="please_login">Please Login</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="name">Name</string>
+    <string name="comfirm_password">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="dashboard_admin">Dashboard Admin</string>
+    <string name="add_category">+ Add Category</string>
+    <string name="submit">SUBMIT</string>
+    <string name="add_a_new_category">Add a new Category</string>
+    <string name="category_title">Category Title</string>
+    <string name="we_will_send_you_the_password_reset_link_to_your_email">We will send you the password reset link to your email</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="send">Send</string>
+    <string name="cancel">Cancel</string>
+    <string name="search">Search</string>
+    <string name="book_description">Book Description</string>
+    <string name="book_title">Book Title</string>
+    <string name="book_category">Book Category</string>
+    <string name="add_a_new_book">Add a new Book</string>
+</resources>
