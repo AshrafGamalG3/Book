@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back01"
-    tools:context=".ui.home.presentation.HomeFragment">
+    tools:context=".ui.admin.presentation.HomeFragment">
 
 
     <LinearLayout
@@ -42,6 +42,7 @@
     </LinearLayout>
 
     <ImageButton
+        android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_10sdp"
@@ -57,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:background="@color/white"
         android:drawableStart="@drawable/ic_search_gray"
         android:drawablePadding="@dimen/_5sdp"

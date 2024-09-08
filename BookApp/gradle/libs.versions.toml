@@ -1,5 +1,8 @@
 [versions]
 agp = "8.5.1"
+androidPdfViewer = "2.8.1"
+androidPdfViewerVersion = "3.2.0-beta.1"
+githubAndroidPdfViewer = "2.8.2"
 glide = "4.16.0"
 hiltAndroid = "2.51.1"
 kotlin = "1.9.0"
@@ -24,6 +27,9 @@ firebaseStorage = "21.0.0"
 firebaseDatabase = "21.0.0"
 
 [libraries]
+android-pdf-viewer = { module = "com.github.barteksc:android-pdf-viewer", version.ref = "androidPdfViewer" }
+android-pdf-viewer-v282 = { module = "com.github.barteksc:android-pdf-viewer", version.ref = "githubAndroidPdfViewer" }
+android-pdf-viewer-v320beta1 = { module = "com.github.barteksc:android-pdf-viewer", version.ref = "androidPdfViewerVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }

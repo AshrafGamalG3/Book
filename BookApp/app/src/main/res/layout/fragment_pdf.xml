@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.presentation.PdfFragment">
+    tools:context=".ui.admin.presentation.PdfFragment">
 
     <ImageView
         android:layout_width="match_parent"
@@ -98,7 +98,7 @@
         android:layout_height="4dp"
         android:background="@color/gray02"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/edBookCategory"
+        app:layout_constraintBottom_toTopOf="@id/book_category"
         app:layout_constraintEnd_toEndOf="@id/right_line"
         app:layout_constraintStart_toStartOf="@id/left_line" />
 
@@ -110,7 +110,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@id/right_line"
         app:layout_constraintStart_toStartOf="@id/left_line"
-        app:layout_constraintTop_toBottomOf="@id/edBookCategory" />
+        app:layout_constraintTop_toBottomOf="@id/book_category" />
 
     <View
         android:layout_width="0dp"
@@ -119,35 +119,37 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@id/right_line"
         app:layout_constraintStart_toStartOf="@id/left_line"
-        app:layout_constraintTop_toBottomOf="@id/edBookCategory" />
+        app:layout_constraintTop_toBottomOf="@id/book_category" />
 
-    <EditText
-        android:id="@+id/edBookCategory"
+
+    <TextView
+        android:id="@+id/book_category"
         style="@style/editText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_category_gray"
         android:drawablePadding="@dimen/_10sdp"
         android:hint="@string/book_category"
-        android:inputType="text"
         android:padding="@dimen/_10sdp"
-        android:textColor="@color/gray02"
+        android:textColor="@color/black"
         android:textColorHint="@color/gray01"
+        android:textSize="@dimen/_14sdp"
+        app:drawableEndCompat="@drawable/ic_down_gray"
+        app:drawableStartCompat="@drawable/ic_category_gray"
         app:layout_constraintEnd_toEndOf="@id/right_line"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/left_line"
         app:layout_constraintTop_toBottomOf="@id/edBookDescription" />
 
-
     <com.github.leandroborgesferreira.loadingbutton.customViews.CircularProgressButton
-        android:id="@+id/buttonRegister"
+        android:id="@+id/upload_button"
         style="@style/blueButtonStyle"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginTop="@dimen/_30sdp"
-        android:text="@string/register"
+        android:text="@string/upload"
         app:layout_constraintEnd_toEndOf="@id/right_line"
         app:layout_constraintStart_toStartOf="@id/left_line"
-        app:layout_constraintTop_toBottomOf="@id/edBookCategory"
+        app:layout_constraintTop_toBottomOf="@id/book_category"
         app:spinning_bar_color="@color/white" />
 
 

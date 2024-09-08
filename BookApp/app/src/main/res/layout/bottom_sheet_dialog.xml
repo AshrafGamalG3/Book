@@ -1,0 +1,42 @@
+<!-- res/layout/bottom_sheet_dialog.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="16dp">
+
+   <com.google.android.material.button.MaterialButton
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/editOption"
+       android:text="Edit"
+       android:backgroundTint="@color/purple_500"
+       android:textColor="@color/white"
+
+       app:strokeWidth="1dp"
+       app:strokeColor="@color/purple_500"
+       app:cornerRadius="@dimen/_5sdp"
+       android:textAppearance="?attr/textAppearanceListItem"
+       android:gravity="center"
+       />
+    <com.google.android.material.button.MaterialButton
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/deleteOption"
+       android:text="Delete"
+        app:cornerRadius="@dimen/_5sdp"
+
+        android:layout_marginTop="@dimen/_10sdp"
+       android:backgroundTint="@color/red"
+       android:textColor="@color/white"
+        app:strokeWidth="2dp"
+        app:strokeColor="@color/red"
+       android:textAppearance="?attr/textAppearanceListItem"
+       android:gravity="center"
+       />
+
+
+
+</LinearLayout>

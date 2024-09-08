@@ -58,7 +58,7 @@ class RegisterFragment : Fragment() {
                 val password = edPasswordLogin.text.toString().trim()
                 val confirmPassword = edPasswordLoginConfirm.text.toString().trim()
 
-                val user = User(name, email, password, confirmPassword, "")
+                val user = User("user", name, email, password, confirmPassword, "")
 
                 createAccountWithEmailAndPass(user)
             }
@@ -66,7 +66,7 @@ class RegisterFragment : Fragment() {
 
     }
 
-    private fun createAccountWithEmailAndPass(user: User)  {
+    private fun createAccountWithEmailAndPass(user: User) {
         viewModel.createAccountWithEmailAndPass(user)
     }
 

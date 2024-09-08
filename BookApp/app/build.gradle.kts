@@ -75,6 +75,15 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
 
+    //pdf viewe
+    implementation("io.github.afreakyelf:Pdf-Viewer:2.1.1")
+    implementation("com.github.mhiew:android-pdf-viewer:3.2.0-beta.1")
+
+    //Swipe refresh layout
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
+
+
 
 }
 

@@ -3,11 +3,17 @@
 buildscript {
     repositories {
         google()
+        mavenCentral()
+        jcenter()
     }
+
     dependencies {
         classpath(libs.androidx.navigation.safe.args.gradle.plugin)
+        classpath ("com.android.tools.build:gradle:8.0.0")
     }
 }
+
+
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
@@ -16,3 +22,4 @@ plugins {
     id("com.google.dagger.hilt.android") version "2.51.1" apply false
     alias(libs.plugins.google.gms.google.services) apply false
 }
+

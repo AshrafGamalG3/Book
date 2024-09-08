@@ -83,12 +83,7 @@ class LoginFragment : Fragment() {
 
                         is Resource.Success -> {
                             binding.buttonLogin.revertAnimation()
-                            Toast.makeText(
-                                requireContext(),
-                                "Login Successfully",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                            it.data?.let { it1 -> getUserById(it1.uid) }
                         }
 
                         is Resource.Error -> {
@@ -103,6 +98,34 @@ class LoginFragment : Fragment() {
                 }
 
 
+            }
+        }
+
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.user.collect{
+                    when(it){
+                        is Resource.Loading ->{
+                            binding.buttonLogin.startAnimation()
+                        }
+                        is Resource.Success ->{
+                            binding.buttonLogin.revertAnimation()
+                            if (it.data?.type=="admin"){
+
+                            }else{
+                               findNavController().navigate(R.id.action_loginFragment_to_userFragment)
+                            }
+
+                        }
+                        is Resource.Error ->{
+                            binding.buttonLogin.revertAnimation()
+                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+
+
+                        }
+                        else -> Unit
+                    }
+                }
             }
         }
 
@@ -153,6 +176,11 @@ class LoginFragment : Fragment() {
 
             }
         }
+    }
+
+    private fun getUserById(uid: String){
+        viewModel.getUserById(uid)
+
     }
 
     override fun onDestroyView() {

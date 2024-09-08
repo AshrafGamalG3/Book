@@ -36,6 +36,10 @@ class AuthViewModel @Inject constructor(
     private val _resetPassword = MutableStateFlow<Resource<String>>(Resource.Unspecified())
     val resetPassword: MutableStateFlow<Resource<String>> = _resetPassword
 
+    private val _user = MutableStateFlow<Resource<User>>(Resource.Unspecified())
+    val user: MutableStateFlow<Resource<User>> = _user
+
+
     
     fun createAccountWithEmailAndPass(user: User) {
         if (checkValidationRegister(user, user.password, user.confirmPassword)) {
@@ -90,6 +94,13 @@ class AuthViewModel @Inject constructor(
 
     }
 
+    fun getUserById(uid: String){
+        viewModelScope.launch {
+            _user.emit(Resource.Loading())
+            val user = authUseCase.getUserById(uid)
+            _user.emit(user)
+        }
+    }
     private fun checkValidationLogin(email: String, password: String): Boolean {
         val emailValidation = validateEmail(email)
         val passwordValidation = validatePassword(password)

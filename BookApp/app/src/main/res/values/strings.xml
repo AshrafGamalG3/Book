@@ -28,4 +28,22 @@
     <string name="book_title">Book Title</string>
     <string name="book_category">Book Category</string>
     <string name="add_a_new_book">Add a new Book</string>
+    <string name="upload">UPLOAD</string>
+    <string name="books">Books</string>
+    <string name="category">Category</string>
+    <string name="update">UPDATE</string>
+    <string name="edit_book_info">Edit Book Info</string>
+    <string name="no_books_found_of_this_category">No books found of this category</string>
+    <string name="n_m">N/A</string>
+    <string name="date">Date</string>
+    <string name="size">Size</string>
+    <string name="views">Views</string>
+    <string name="the_description_of_the_book">The description of the book</string>
+    <string name="read">READ</string>
+    <string name="read_book">Read Book</string>
+    <string name="n_n">N/N</string>
+    <string name="dowmload">DOWMLOAD</string>
+    <string name="downloading_0_mb_0_mb">Downloading: 0 MB / 0 MB</string>
+    <string name="dashboard_user">Dashboard User</string>
+    <string name="favorite">Favorite</string>
 </resources>

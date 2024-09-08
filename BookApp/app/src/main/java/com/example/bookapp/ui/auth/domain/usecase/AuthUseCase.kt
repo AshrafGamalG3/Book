@@ -1,7 +1,7 @@
 package com.example.bookapp.ui.auth.domain.usecase
 
 import com.example.bookapp.ui.auth.data.model.User
-import com.example.bookapp.ui.auth.domain.repo.AuthIRepo
+import com.example.bookapp.ui.auth.data.repo.AuthIRepo
 import com.example.bookapp.utils.Resource
 import com.google.firebase.auth.FirebaseUser
 import javax.inject.Inject
@@ -16,6 +16,10 @@ class AuthUseCase @Inject constructor(private val iRepo: AuthIRepo)  {
     }
     suspend fun resetPassword(email: String) : Resource<String> {
         return iRepo.resetPassword(email)
+    }
+    suspend fun getUserById(uid: String) : Resource<User> {
+        return iRepo.getUserById(uid)
+
     }
 
 }

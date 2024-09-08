@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_splashFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_userFragment"
+            app:destination="@id/userFragment" />
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
@@ -38,6 +41,9 @@
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_userFragment"
+            app:destination="@id/userFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -50,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.bookapp.ui.home.presentation.HomeFragment"
+        android:name="com.example.bookapp.ui.admin.presentation.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -59,15 +65,96 @@
         <action
             android:id="@+id/action_homeFragment_to_pdfFragment"
             app:destination="@id/pdfFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_categoryDetailsFragment"
+            app:destination="@id/categoryDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/homeFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/addCategoryFragment"
-        android:name="com.example.bookapp.ui.home.presentation.AddCategoryFragment"
+        android:name="com.example.bookapp.ui.admin.presentation.AddCategoryFragment"
         android:label="fragment_add_category"
         tools:layout="@layout/fragment_add_category" />
     <fragment
         android:id="@+id/pdfFragment"
-        android:name="com.example.bookapp.ui.home.presentation.PdfFragment"
+        android:name="com.example.bookapp.ui.admin.presentation.PdfFragment"
         android:label="fragment_pdf"
         tools:layout="@layout/fragment_pdf" />
+    <fragment
+        android:id="@+id/categoryDetailsFragment"
+        android:name="com.example.bookapp.ui.admin.presentation.CategoryDetailsFragment"
+        android:label="fragment_category_details"
+        tools:layout="@layout/fragment_category_details" >
+        <argument
+            android:name="categoryName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_categoryDetailsFragment_to_editBookFragment"
+            app:destination="@id/editBookFragment" />
+        <action
+            android:id="@+id/action_categoryDetailsFragment_to_showBookFragment"
+            app:destination="@id/showBookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editBookFragment"
+        android:name="com.example.bookapp.ui.admin.presentation.EditBookFragment"
+        android:label="fragment_edit_book"
+        tools:layout="@layout/fragment_edit_book" >
+        <argument
+            android:name="book"
+            app:argType="com.example.bookapp.ui.admin.data.model.BookModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/showBookFragment"
+        android:name="com.example.bookapp.ui.admin.presentation.ShowBookFragment"
+        android:label="fragment_show_book"
+        tools:layout="@layout/fragment_show_book" >
+        <argument
+            android:name="book"
+            app:argType="com.example.bookapp.ui.admin.data.model.BookModel" />
+        <action
+            android:id="@+id/action_showBookFragment_to_pdfBookFragment"
+            app:destination="@id/pdfBookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pdfBookFragment"
+        android:name="com.example.bookapp.ui.admin.presentation.PdfBookFragment"
+        android:label="fragment_pdf_book"
+        tools:layout="@layout/fragment_pdf_book" >
+        <argument
+            android:name="book"
+            app:argType="com.example.bookapp.ui.admin.data.model.BookModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.bookapp.ui.admin.presentation.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_userFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+
+        <action
+            android:id="@+id/action_userFragment_to_bookUserFragment"
+            app:destination="@id/bookUserFragment" />
+        <action
+            android:id="@+id/action_userFragment_to_showBookFragment2"
+            app:destination="@id/showBookFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/bookUserFragment"
+        android:name="com.example.bookapp.ui.admin.presentation.BookUserFragment"
+        android:label="fragment_book_user"
+        tools:layout="@layout/fragment_book_user">
+        <action
+            android:id="@+id/action_bookUserFragment_to_showBookFragment"
+            app:destination="@id/showBookFragment" />
+    </fragment>
+
 </navigation>
