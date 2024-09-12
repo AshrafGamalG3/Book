@@ -6,12 +6,12 @@ import com.example.bookapp.utils.Constants.USER_COLLECTION
 import com.example.bookapp.utils.Resource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class AuthRepo @Inject constructor(private val firebaseAuth: FirebaseAuth,private val db: FirebaseFirestore) : AuthIRepo {
+class AuthRepo @Inject constructor(private val firebaseAuth: FirebaseAuth,private val db: FirebaseFirestore) :
+    AuthIRepo {
     override suspend fun createAccountWithEmailAndPass(user: User, password: String): Resource<User> {
         return try {
             val register=firebaseAuth.createUserWithEmailAndPassword(user.email,password).await()
@@ -43,6 +43,15 @@ class AuthRepo @Inject constructor(private val firebaseAuth: FirebaseAuth,privat
             Resource.Error(e.message.toString())
         }
 
+    }
+
+    override suspend fun getUserById(uid: String): Resource<User> {
+        return try {
+            val user=db.collection(USER_COLLECTION).document(uid).get().await().toObject(User::class.java)
+            Resource.Success(user!!)
+        }catch (e:Exception){
+            Resource.Error(e.message.toString())
+        }
     }
 
 

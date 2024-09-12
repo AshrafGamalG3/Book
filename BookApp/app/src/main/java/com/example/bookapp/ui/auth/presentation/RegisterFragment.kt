@@ -58,7 +58,7 @@ class RegisterFragment : Fragment() {
                 val password = edPasswordLogin.text.toString().trim()
                 val confirmPassword = edPasswordLoginConfirm.text.toString().trim()
 
-                val user = User("user", name, email, password, confirmPassword, "")
+                val user = User(System.currentTimeMillis(),"user", name, email, password, confirmPassword, "")
 
                 createAccountWithEmailAndPass(user)
             }

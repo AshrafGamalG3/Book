@@ -27,7 +27,7 @@ class DownloadService : Service() {
     private lateinit var pdfUrl: String
     private var totalSize: Long = 0
     private var downloadJob: Job? = null
-
+    private var isCancelled = false
     override fun onBind(intent: Intent): IBinder? {
         return null
     }
@@ -36,6 +36,7 @@ class DownloadService : Service() {
         super.onCreate()
         createNotificationChannel()
     }
+
 
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -65,7 +66,6 @@ class DownloadService : Service() {
     }
 
 
-
     private fun downloadPdf(pdfUrl: String, fileName: String) {
         val storageRef = FirebaseStorage.getInstance().reference.child(pdfUrl)
         val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "$fileName.pdf")
@@ -80,19 +80,30 @@ class DownloadService : Service() {
                 totalSize = metadata.sizeBytes
 
                 val fileTask = storageRef.getFile(file)
+
                 fileTask.addOnProgressListener { snapshot ->
-                    val progress = (100.0 * snapshot.bytesTransferred / totalSize).toInt()
-                    showProgressNotification(progress)
+                    if (!isCancelled) {
+                        val progress = (100.0 * snapshot.bytesTransferred / totalSize).toInt()
+                        showProgressNotification(progress)
+                    } else {
+                        fileTask.cancel()  // Stop the task if cancelled
+                    }
                 }.addOnSuccessListener {
-                    Log.d("DownloadService", "Download complete")
-                    showCompleteNotification(file)
+                    if (!isCancelled) {
+                        Log.d("DownloadService", "Download complete")
+                        showCompleteNotification(file)
+                    }
                 }.addOnFailureListener { exception ->
-                    Log.e("DownloadService", "Download failed", exception)
-                    showErrorNotification(exception)
+                    if (!isCancelled) {
+                        Log.e("DownloadService", "Download failed", exception)
+                        showErrorNotification(exception)
+                    }
                 }.await()
             } catch (e: Exception) {
-                Log.e("DownloadService", "Download failed", e)
-                showErrorNotification(e)
+                if (!isCancelled) {
+                    Log.e("DownloadService", "Download failed", e)
+                    showErrorNotification(e)
+                }
             } finally {
                 stopSelf()
             }
@@ -185,10 +196,13 @@ class DownloadService : Service() {
 
 
     private fun cancelDownload() {
-        downloadJob?.cancel()
+        isCancelled = true  // Set the flag to indicate cancellation
+        downloadJob?.cancel()  // Cancel the coroutine job
+
         showCancelNotification("Download Canceled", "The PDF download was canceled.")
         stopSelf()
     }
+
 
     private fun showCancelNotification(title: String, message: String) {
         val notificationManager = getSystemService(NotificationManager::class.java)

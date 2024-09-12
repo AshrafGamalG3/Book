@@ -111,6 +111,7 @@ class LoginFragment : Fragment() {
                         is Resource.Success ->{
                             binding.buttonLogin.revertAnimation()
                             if (it.data?.type=="admin"){
+                                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
 
                             }else{
                                findNavController().navigate(R.id.action_loginFragment_to_userFragment)

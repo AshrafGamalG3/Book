@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back01"
-    tools:context=".ui.admin.presentation.HomeFragment">
+    tools:context=".ui.home.presentation.HomeFragment">
 
 
     <LinearLayout
@@ -50,6 +50,16 @@
         android:src="@drawable/ic_logout_white"
         app:layout_constraintBottom_toBottomOf="@id/texts"
         app:layout_constraintEnd_toEndOf="@id/texts"
+        app:layout_constraintTop_toTopOf="@id/texts" />
+    <ImageButton
+        android:id="@+id/profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:backgroundTint="@color/purple_500"
+        android:src="@drawable/ic_person_white"
+        app:layout_constraintBottom_toBottomOf="@id/texts"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/texts" />
 
     <EditText

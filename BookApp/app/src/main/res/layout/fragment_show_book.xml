@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.admin.presentation.ShowBookFragment">
+    tools:context=".ui.home.presentation.ShowBookFragment">
 
     <RelativeLayout
 
@@ -299,7 +299,7 @@ android:id="@+id/bo"
             android:drawableTop="@drawable/baseline_menu_book_24"
             android:text="@string/read"
             android:textColor="@color/white"
-            android:textStyle="bold"
+            android:textSize="@dimen/_9sdp"
             android:layout_weight="1"
             app:cornerRadius="5dp"
 
@@ -312,7 +312,7 @@ android:id="@+id/bo"
             android:drawableTop="@drawable/baseline_download_24"
             android:text="@string/dowmload"
             android:textColor="@color/white"
-            android:textStyle="bold"
+            android:textSize="@dimen/_9sdp"
             android:layout_weight="1"
             app:cornerRadius="5dp"
 
@@ -325,7 +325,7 @@ android:id="@+id/bo"
             android:drawableTop="@drawable/baseline_favorite_border_24"
             android:text="@string/favorite"
             android:textColor="@color/white"
-            android:textStyle="bold"
+            android:textSize="@dimen/_9sdp"
             android:layout_weight="1"
             app:cornerRadius="5dp"
             />

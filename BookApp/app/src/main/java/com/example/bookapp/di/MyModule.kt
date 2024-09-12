@@ -3,10 +3,10 @@ package com.example.bookapp.di
 import android.app.Application
 import android.content.Context.MODE_PRIVATE
 
-import com.example.bookapp.ui.auth.domain.repo.AuthRepo
-import com.example.bookapp.ui.auth.data.repo.AuthIRepo
-import com.example.bookapp.ui.admin.domain.repo.HomeRepo
-import com.example.bookapp.ui.admin.data.repo.HomeIRepo
+import com.example.bookapp.ui.auth.data.repo.AuthRepo
+import com.example.bookapp.ui.auth.domain.repo.AuthIRepo
+import com.example.bookapp.ui.home.data.repo.HomeRepo
+import com.example.bookapp.ui.home.domain.repo.HomeIRepo
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore

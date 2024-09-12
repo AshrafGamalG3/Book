@@ -2,8 +2,10 @@ package com.example.bookapp.ui.auth.data.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.protobuf.Timestamp
 
 data class User(
+    val timestamp: Long,
     val type: String,
     val name: String,
     val email: String,
@@ -11,9 +13,10 @@ data class User(
     val confirmPassword: String,
     var imagePath: String
 ) : Parcelable {
-    constructor() : this("", "", "", "", "", "")
+    constructor() : this(0,"", "", "", "", "", "")
 
     constructor(parcel: Parcel) : this(
+        parcel.readLong(),
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",

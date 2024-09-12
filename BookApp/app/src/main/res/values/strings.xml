@@ -46,4 +46,15 @@
     <string name="downloading_0_mb_0_mb">Downloading: 0 MB / 0 MB</string>
     <string name="dashboard_user">Dashboard User</string>
     <string name="favorite">Favorite</string>
+    <string name="profile">Profile</string>
+    <string name="full_name">Full Name</string>
+    <string name="user_gmail_com">user@gmail.com</string>
+    <string name="favorite_books">Favorite Books</string>
+    <string name="account">Account</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="member">Member</string>
+    <string name="favorite_book">Favorite Book</string>
+    <string name="profile_photo">Profile Photo</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
 </resources>

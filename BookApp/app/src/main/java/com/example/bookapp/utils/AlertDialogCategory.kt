@@ -2,7 +2,7 @@ package com.example.bookapp.utils
 
 import android.content.Context
 import androidx.appcompat.app.AlertDialog
-import com.example.bookapp.ui.admin.data.model.CategoryModel
+import com.example.bookapp.ui.home.data.model.CategoryModel
 
 
 class AlertDialogCategory(

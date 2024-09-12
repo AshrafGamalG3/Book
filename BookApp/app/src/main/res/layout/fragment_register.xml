@@ -63,6 +63,7 @@
             android:textColor="@color/gray02"
             android:textColorHint="@color/gray01"
             app:layout_constraintEnd_toEndOf="@id/right_line"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/left_line"
             app:layout_constraintTop_toTopOf="@id/top_edit_text" />
 

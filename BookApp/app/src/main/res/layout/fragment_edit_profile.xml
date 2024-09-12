@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.home.presentation.EditProfileFragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:background="@drawable/shape_toolbar01"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/edit_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/edit_profile"
+        android:layout_marginTop="@dimen/_13sdp"
+        android:textSize="@dimen/_18sdp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        />
+
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:backgroundTint="@color/purple_500"
+        android:src="@drawable/ic_back_white"
+        app:layout_constraintBottom_toBottomOf="@id/edit_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edit_profile" />
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_profile"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edit_profile"
+        android:layout_marginTop="@dimen/_65sdp"
+        android:src="@drawable/ic_person_gray"
+        android:background="@color/white"
+        app:shapeAppearanceOverlay="@style/styleImage"
+        />
+
+
+
+
+    <EditText
+        android:id="@+id/edTextName"
+        style="@style/editText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_person_gray"
+        android:drawablePadding="@dimen/_10sdp"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
+        android:padding="@dimen/_10sdp"
+        android:textColor="@color/gray02"
+        android:textColorHint="@color/gray01"
+        app:layout_constraintEnd_toEndOf="@id/right_line"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/left_line"
+        app:layout_constraintTop_toBottomOf="@id/image_profile"
+        android:layout_marginTop="@dimen/_28sdp"
+         />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="@color/gray02"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/edTextName"
+        app:layout_constraintEnd_toEndOf="@id/right_line"
+        app:layout_constraintStart_toStartOf="@id/left_line" />
+
+
+    <com.github.leandroborgesferreira.loadingbutton.customViews.CircularProgressButton
+        android:id="@+id/buttonUpdate"
+        style="@style/blueButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:text="@string/update"
+        app:layout_constraintEnd_toEndOf="@id/right_line"
+        app:layout_constraintStart_toStartOf="@id/left_line"
+        app:layout_constraintTop_toBottomOf="@id/edTextName"
+
+        app:spinning_bar_color="@color/white" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/left_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.09" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/right_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.91" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
