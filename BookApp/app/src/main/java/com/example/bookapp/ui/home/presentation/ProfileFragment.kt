@@ -44,7 +44,7 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
@@ -84,7 +84,7 @@ class ProfileFragment : Fragment() {
                        }
                        is Resource.Success ->{
                            user=it.data
-                           if (it.data?.type == "admin"){
+                           if (it.data?.type == "Librarian"){
                                binding.booksRecyclerView.visibility=View.GONE
                            }
                            binding.imageProfile.setImageURI(it.data?.imagePath?.toUri())

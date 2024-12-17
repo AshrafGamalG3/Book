@@ -49,8 +49,9 @@ class UserFragment : Fragment() {
 
     private fun onClick(){
         binding.logout.setOnClickListener {
-            findNavController().navigate(R.id.action_userFragment_to_loginFragment)
+
             firebaseAuth.signOut()
+            findNavController().navigate(R.id.action_userFragment_to_welcomeFragment)
 
 
         }

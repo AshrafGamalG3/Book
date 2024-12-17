@@ -72,22 +72,28 @@ class ShowBookFragment : Fragment() {
     }
 
     private fun loadData(bookModel: BookModel) {
-        binding.bookName.text = bookModel.title
-        binding.categoryTv.text = bookModel.categoryName
-        binding.dateTv.text = formatDate(bookModel.timestamp)
-        binding.viewTv.text = bookModel.bookViews.toString()
-        binding.downloadTv.text = bookModel.bookDownloads.toString()
-        binding.titleBook.text = bookModel.title
-        getPdfSize(bookModel.pdfUrl) { size ->
-            binding.sizeTv.text = size
-        }
-        loadPdfFromUrlSinglePage(bookModel.pdfUrl, binding.viewPage, binding.progressBar)
+        _binding?.let { binding ->
+            binding.bookName.text = bookModel.title
+            binding.categoryTv.text = bookModel.categoryName
+            binding.dateTv.text = formatDate(bookModel.timestamp)
+            binding.viewTv.text = bookModel.bookViews.toString()
+            binding.downloadTv.text = bookModel.bookDownloads.toString()
+            binding.titleBook.text = bookModel.title
 
-        getPdfPageCount(bookModel.pdfUrl) {
-            binding.pageTv.text = it.toString()
-        }
-        binding.bookDescription.text = bookModel.description
+            getPdfSize(bookModel.pdfUrl) { size ->
+                _binding?.sizeTv?.text = size
+            }
+
+            loadPdfFromUrlSinglePage(bookModel.pdfUrl, binding.viewPage, binding.progressBar)
+
+            getPdfPageCount(bookModel.pdfUrl) {
+                _binding?.pageTv?.text = it.toString()
+            }
+
+            binding.bookDescription.text = bookModel.description
+        } ?: Log.e("ShowBookFragment", "Binding is null in loadData")
     }
+
 
     private fun onClick(bookModel: BookModel) {
         binding.backButton.setOnClickListener {
@@ -169,7 +175,7 @@ class ShowBookFragment : Fragment() {
                     when (resource) {
                         is Resource.Success -> {
                             val user = resource.data!!
-                            if (user.type == "admin") {
+                            if (user.type == "Librarian") {
                                 binding.favoriteBook.visibility = View.GONE
                             } else {
                                 binding.favoriteBook.visibility = View.VISIBLE

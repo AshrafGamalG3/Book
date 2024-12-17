@@ -85,6 +85,7 @@ class EditProfileFragment : Fragment() {
                 Toast.makeText(requireContext(), "Your name is the same", Toast.LENGTH_SHORT).show()
             } else {
                 binding.buttonUpdate.startAnimation()
+
                 appViewModel.updateProfile(user.copy(name = binding.edTextName.text.toString()))
                 binding.buttonUpdate.revertAnimation()
                 findNavController().navigateUp()

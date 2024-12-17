@@ -19,7 +19,8 @@
             android:background="@drawable/shape_toolbar01"
             app:layout_constraintBottom_toBottomOf="@id/bottom_image"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <ImageView
             android:id="@+id/arrow_back"

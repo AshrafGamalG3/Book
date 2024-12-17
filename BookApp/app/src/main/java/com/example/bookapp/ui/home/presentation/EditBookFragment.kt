@@ -13,51 +13,46 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.bookapp.R
 import com.example.bookapp.databinding.FragmentEditBookBinding
+import com.example.bookapp.ui.home.command.CommandInvoker
+import com.example.bookapp.ui.home.command.UpdateBookCommand
 import com.example.bookapp.ui.home.data.model.BookModel
 import com.example.bookapp.ui.home.data.model.CategoryModel
 import com.example.bookapp.utils.AlertDialogCategory
 import com.example.bookapp.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
 @AndroidEntryPoint
 class EditBookFragment : Fragment() {
     private var _binding: FragmentEditBookBinding? = null
     private val binding get() = _binding!!
     private val viewModel: AppViewModel by viewModels()
     private var listCategory: List<CategoryModel> = emptyList()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
-    }
+    private val commandInvoker = CommandInvoker()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_edit_book, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentEditBookBinding.bind(view)
+
         val bookModel = EditBookFragmentArgs.fromBundle(requireArguments()).book
         onClick(bookModel)
         setBook(bookModel)
         observeCategories()
         getCategories()
         observeUpdateBook()
-
-
     }
 
     private fun onClick(bookModel: BookModel) {
         binding.arrowBack.setOnClickListener {
             findNavController().navigateUp()
         }
+
         binding.bookCategory.setOnClickListener {
             val dialog = AlertDialogCategory(requireContext(), listCategory) { selectedCategory ->
                 binding.bookCategory.text = selectedCategory
@@ -77,10 +72,10 @@ class EditBookFragment : Fragment() {
     }
 
     private fun getUpdatedData(bookModel: BookModel) {
-
         val title = binding.edBookTitle.text.toString()
         val description = binding.edBookDescription.text.toString()
         val category = binding.bookCategory.text.toString()
+
         if (title == bookModel.title && description == bookModel.description && category == bookModel.categoryName) {
             Toast.makeText(requireContext(), "No changes made", Toast.LENGTH_SHORT).show()
             return
@@ -89,10 +84,11 @@ class EditBookFragment : Fragment() {
         if (category != bookModel.categoryName) {
             Toast.makeText(
                 requireContext(),
-                "Your change Category to $category",
+                "You changed the category to $category",
                 Toast.LENGTH_SHORT
             ).show()
         }
+
         val updatedBookModel = BookModel(
             bookModel.favorite,
             bookModel.bookViews,
@@ -105,8 +101,10 @@ class EditBookFragment : Fragment() {
             bookModel.userId,
             bookModel.timestamp
         )
-        updateBook(updatedBookModel)
 
+        val updateBookCommand = UpdateBookCommand(viewModel, updatedBookModel)
+        commandInvoker.addCommand(updateBookCommand)
+        commandInvoker.executeCommands()
     }
 
     private fun observeCategories() {
@@ -119,7 +117,6 @@ class EditBookFragment : Fragment() {
                                 listCategory = it
                             }
                         }
-
                         else -> Unit
                     }
                 }
@@ -130,12 +127,11 @@ class EditBookFragment : Fragment() {
     private fun observeUpdateBook() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.updateBook.collect {
-                    when (it) {
+                viewModel.updateBook.collect { resource ->
+                    when (resource) {
                         is Resource.Loading -> {
                             binding.buttonUpdate.startAnimation()
                         }
-
                         is Resource.Success -> {
                             binding.buttonUpdate.revertAnimation()
                             Toast.makeText(
@@ -145,22 +141,20 @@ class EditBookFragment : Fragment() {
                             ).show()
                             findNavController().navigateUp()
                         }
-
                         is Resource.Error -> {
                             binding.buttonUpdate.revertAnimation()
+                            Toast.makeText(
+                                requireContext(),
+                                "Failed to update book",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
-
                         else -> Unit
                     }
                 }
             }
         }
     }
-
-    private fun updateBook(bookModel: BookModel) {
-        viewModel.updateBook(bookModel)
-    }
-
 
     private fun getCategories() {
         viewModel.getCategories()

@@ -24,6 +24,7 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private val viewModel: AuthViewModel by viewModels()
+    var type: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -41,6 +42,8 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentLoginBinding.bind(view)
+        type=LoginFragmentArgs.fromBundle(requireArguments()).type
+
 
         onClick()
         loginObserver()
@@ -110,19 +113,21 @@ class LoginFragment : Fragment() {
                         }
                         is Resource.Success ->{
                             binding.buttonLogin.revertAnimation()
-                            if (it.data?.type=="admin"){
-                                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                          if (type=="Normal User"&&it.data?.type=="NormalUser"){
+                              findNavController().navigate(R.id.action_loginFragment_to_userFragment)
+                          }else if (type=="Librarian"&& it.data?.type=="Librarian"){
+                              findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                          }else{
+                              binding.buttonLogin.revertAnimation()
+                              Toast.makeText(requireContext(), "Please check your type", Toast.LENGTH_SHORT).show()
+                              findNavController().navigate(R.id.action_loginFragment_to_welcomeFragment)
 
-                            }else{
-                               findNavController().navigate(R.id.action_loginFragment_to_userFragment)
-                            }
+                          }
 
                         }
                         is Resource.Error ->{
                             binding.buttonLogin.revertAnimation()
                             Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-
-
                         }
                         else -> Unit
                     }

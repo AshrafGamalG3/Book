@@ -15,6 +15,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.bookapp.R
 import com.example.bookapp.databinding.FragmentCategoryDetailsBinding
+import com.example.bookapp.ui.home.command.CommandInvoker
+import com.example.bookapp.ui.home.command.DeleteBookCommand
 import com.example.bookapp.ui.home.data.model.BookModel
 
 import com.example.bookapp.ui.home.presentation.adapter.BookAdapter
@@ -31,6 +33,7 @@ class CategoryDetailsFragment : Fragment() {
     private val viewModel: AppViewModel by viewModels()
     private val bookAdapter = BookAdapter()
     private var allBooks: List<BookModel> = emptyList()
+    private val commandInvoker = CommandInvoker()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,9 +76,12 @@ class CategoryDetailsFragment : Fragment() {
 
 
         }
-        bookAdapter.onItemClickListener2=object :BookAdapter.onItemClickBookListener{
+        bookAdapter.onItemClickListener2 = object : BookAdapter.onItemClickBookListener {
             override fun onItemClick(bookModel: BookModel) {
-                val action=CategoryDetailsFragmentDirections.actionCategoryDetailsFragmentToShowBookFragment(bookModel)
+                val action =
+                    CategoryDetailsFragmentDirections.actionCategoryDetailsFragmentToShowBookFragment(
+                        bookModel
+                    )
                 findNavController().navigate(action)
             }
 
@@ -89,12 +95,17 @@ class CategoryDetailsFragment : Fragment() {
         val editOption = dialog.findViewById<TextView>(R.id.editOption)
         val deleteOption = dialog.findViewById<TextView>(R.id.deleteOption)
         editOption?.setOnClickListener {
-           val action = CategoryDetailsFragmentDirections.actionCategoryDetailsFragmentToEditBookFragment(bookModel)
+            val action =
+                CategoryDetailsFragmentDirections.actionCategoryDetailsFragmentToEditBookFragment(
+                    bookModel
+                )
             findNavController().navigate(action)
             dialog.dismiss()
         }
         deleteOption?.setOnClickListener {
-            deleteCategoryFromFirebase(bookModel)
+            val deleteBookCommand = DeleteBookCommand(viewModel, bookModel)
+            commandInvoker.addCommand(deleteBookCommand)
+            commandInvoker.executeCommands()
             deleteCategoryFromRecyclerView(bookModel)
             Toast.makeText(requireContext(), "Book deleted", Toast.LENGTH_SHORT).show()
             getBooksByCategory(binding.categoryName.text.toString())
@@ -125,10 +136,10 @@ class CategoryDetailsFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.getAllBooksByCategory.observe(viewLifecycleOwner) {
-                    bookAdapter.type="admin"
+                    bookAdapter.type = "admin"
                     bookAdapter.books = it.data ?: emptyList()
-                    if (it.data?.size==0){
-                     binding.notBooks.visibility=View.VISIBLE
+                    if (it.data?.size == 0) {
+                        binding.notBooks.visibility = View.VISIBLE
                     }
                     allBooks = it.data ?: emptyList()
                 }

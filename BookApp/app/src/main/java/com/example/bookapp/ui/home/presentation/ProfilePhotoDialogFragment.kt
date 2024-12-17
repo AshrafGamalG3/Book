@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
+
 import com.example.bookapp.databinding.DialogProfileBinding
 import com.example.bookapp.ui.auth.data.model.User
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

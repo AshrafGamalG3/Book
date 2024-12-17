@@ -9,6 +9,7 @@ import com.example.bookapp.ui.home.data.mapper.HomeMapper
 import com.example.bookapp.ui.home.data.model.BookModel
 import com.example.bookapp.ui.home.data.model.CategoryModel
 import com.example.bookapp.ui.home.domain.usecase.HomeUseCase
+import com.example.bookapp.ui.home.strategy.FavoriteBooksManager
 import com.example.bookapp.utils.BookValidationResult
 import com.example.bookapp.utils.Resource
 import com.example.bookapp.utils.ValidationResult
@@ -27,6 +28,8 @@ import javax.inject.Inject
 class AppViewModel @Inject constructor(
     private val homeUseCase: HomeUseCase,
     private val mapper: HomeMapper,
+    private val favoriteManager: FavoriteBooksManager
+
 ) : ViewModel() {
 
     private var _addCategory = MutableStateFlow<Resource<CategoryModel>>(Resource.Unspecified())
@@ -81,10 +84,7 @@ class AppViewModel @Inject constructor(
                 _categories.value = Resource.Success(sortedResult)
 
             } catch (e: Exception) {
-
-
                 _categories.value = Resource.Error(e.message.toString())
-
             }
         }
     }
@@ -168,7 +168,7 @@ class AppViewModel @Inject constructor(
     fun addFavorite(bookModel: BookModel){
         viewModelScope.launch {
             _favoriteBook.emit(Resource.Loading())
-            val result = homeUseCase.changeFavorite(bookModel)
+            val result = favoriteManager.addFavorite(bookModel)
             _favoriteBook.emit(result)
         }
     }
@@ -176,7 +176,7 @@ class AppViewModel @Inject constructor(
     fun deleteFavorite(bookModel: BookModel){
         viewModelScope.launch {
             _favoriteBook.emit(Resource.Loading())
-            val result = homeUseCase.deleteFavorite(bookModel)
+            val result = favoriteManager.deleteFavorite(bookModel)
             _favoriteBook.emit(result)
         }
     }

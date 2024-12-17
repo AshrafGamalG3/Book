@@ -55,6 +55,7 @@
             app:layout_constraintTop_toTopOf="@id/guideline_top" />
 
         <TextView
+            android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/welcome"
@@ -79,6 +80,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_20sdp"
 
+            android:layout_marginTop="@dimen/_200sdp"
+            android:layout_marginBottom="@dimen/_25sdp"
             android:backgroundTint="@color/purple_500"
             android:fontFamily="@font/poppins_thin"
             android:paddingVertical="@dimen/_12sdp"
@@ -86,11 +89,58 @@
             android:textSize="@dimen/_15sdp"
             app:cornerRadius="@dimen/_5sdp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="@dimen/_25sdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text"
 
-             />
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/register_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+
+            android:layout_marginBottom="@dimen/_25sdp"
+            android:backgroundTint="@color/purple_500"
+            android:fontFamily="@font/poppins_thin"
+            android:paddingVertical="@dimen/_12sdp"
+            android:text="@string/register"
+            android:textSize="@dimen/_15sdp"
+            app:cornerRadius="@dimen/_5sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/login_btn"
+
+            />
+
+
+        <CheckBox
+            android:id="@+id/normal_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Normal User"
+            android:textSize="@dimen/_15sdp"
+            app:layout_constraintStart_toStartOf="@id/login_btn"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/login_btn"
+            android:layout_marginBottom="@dimen/_40sdp"
+            android:checked="false"
+            />
+
+        <CheckBox
+            android:id="@+id/librarian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Librarian"
+            android:textSize="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="@id/login_btn"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/login_btn"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_40sdp"
+            android:checked="false"
+
+            />
 
 
 

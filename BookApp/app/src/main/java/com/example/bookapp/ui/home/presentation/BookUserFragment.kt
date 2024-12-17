@@ -83,7 +83,7 @@ class BookUserFragment : Fragment() {
                 viewModel.getAllBooksByCategory.observe(viewLifecycleOwner) {
 
                     binding.swipeRefreshLayout.isRefreshing = false
-                    bookAdapter.type="user"
+                    bookAdapter.type="Librarian"
                     bookAdapter.books = it.data ?: emptyList()
                     if (it.data?.size == 0) {
                         binding.notBooks.visibility = View.VISIBLE

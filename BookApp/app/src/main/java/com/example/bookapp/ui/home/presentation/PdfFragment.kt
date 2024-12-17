@@ -16,6 +16,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.bookapp.R
 import com.example.bookapp.databinding.FragmentPdfBinding
+import com.example.bookapp.ui.home.command.AddBookCommand
+import com.example.bookapp.ui.home.command.CommandInvoker
 import com.example.bookapp.ui.home.data.model.BookModel
 import com.example.bookapp.ui.home.data.model.CategoryModel
 import com.example.bookapp.utils.AlertDialogCategory
@@ -33,7 +35,7 @@ class PdfFragment : Fragment() {
     private val viewModel: AppViewModel by viewModels()
     private var pdfUri: Uri? = null
     private var listCategory: List<CategoryModel> = emptyList()
-
+    private val commandInvoker = CommandInvoker()
     // Registering the result launcher for picking a PDF
     private val pickPdfLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -97,7 +99,9 @@ class PdfFragment : Fragment() {
                     FirebaseAuth.getInstance().currentUser?.uid ?: "",
                     timestamp
                 )
-                addBookToFirebase(bookModel)
+                val addBookCommand = AddBookCommand(viewModel, bookModel)
+                commandInvoker.addCommand(addBookCommand)
+                commandInvoker.executeCommands()
             } else {
                 Toast.makeText(
                     requireContext(),
@@ -110,9 +114,9 @@ class PdfFragment : Fragment() {
         }
     }
 
-    private fun addBookToFirebase(bookModel: BookModel) {
-        viewModel.addBook(bookModel)
-    }
+//    private fun addBookToFirebase(bookModel: BookModel) {
+//        viewModel.addBook(bookModel)
+//    }
 
     private fun observeCategories() {
         viewLifecycleOwner.lifecycleScope.launch {

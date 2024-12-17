@@ -50,7 +50,7 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.Holder>() {
             binding.progressBar.visibility = View.VISIBLE
 
             loadPdfFromUrlSinglePage(bookModel.pdfUrl, binding.pdfImageView, binding.progressBar)
-            if (type == "user") {
+            if (type == "Normal User") {
                 binding.moreButton.visibility = View.GONE
 
 

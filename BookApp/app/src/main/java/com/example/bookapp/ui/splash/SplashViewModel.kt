@@ -46,8 +46,8 @@ class SplashViewModel @Inject constructor(
                 try {
                     val userRole = authUseCase.getUserById(user.uid)
                     when (userRole.data?.type) {
-                        "admin" -> _navigate.emit(ADMIN_FRAGMENT)
-                        "user" -> _navigate.emit(USER_FRAGMENT)
+                        "Librarian" -> _navigate.emit(ADMIN_FRAGMENT)
+                        "NormalUser" -> _navigate.emit(USER_FRAGMENT)
                         else -> _navigate.emit(LOGIN_FRAGMENT)
                     }
                 } catch (e: Exception) {

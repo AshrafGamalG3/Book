@@ -7,6 +7,10 @@ import com.example.bookapp.ui.auth.data.repo.AuthRepo
 import com.example.bookapp.ui.auth.domain.repo.AuthIRepo
 import com.example.bookapp.ui.home.data.repo.HomeRepo
 import com.example.bookapp.ui.home.domain.repo.HomeIRepo
+import com.example.bookapp.ui.home.domain.usecase.HomeUseCase
+import com.example.bookapp.ui.home.strategy.FavoriteBooksManager
+import com.example.bookapp.ui.home.strategy.FavoriteStrategy
+import com.example.bookapp.ui.home.strategy.RemoteFavoriteStrategy
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
@@ -46,6 +50,14 @@ object MyModule {
     @Provides
     @Singleton
     fun provideHomeRepo(db: FirebaseFirestore,storage: FirebaseStorage): HomeIRepo = HomeRepo(db,storage)
+
+    @Provides
+    @Singleton
+    fun provideFavoriteManager(strategy: FavoriteStrategy): FavoriteBooksManager = FavoriteBooksManager(strategy)
+
+    @Provides
+    @Singleton
+    fun provideRemoteFavoriteStrategy(useCase: HomeUseCase): FavoriteStrategy = RemoteFavoriteStrategy(useCase)
 
 
 

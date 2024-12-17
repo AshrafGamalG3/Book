@@ -14,6 +14,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.bookapp.R
 import com.example.bookapp.databinding.FragmentRegisterBinding
 import com.example.bookapp.ui.auth.data.model.User
+import com.example.bookapp.ui.auth.data.model.UserFactory
+import com.example.bookapp.ui.auth.data.model.UserType
 import com.example.bookapp.utils.RegisterValidation
 import com.example.bookapp.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +27,8 @@ class RegisterFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: AuthViewModel by viewModels()
+    private var type: String? = null
+    var user: User? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +49,7 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentRegisterBinding.bind(view)
+        type = RegisterFragmentArgs.fromBundle(requireArguments()).type
         onClick()
         registerObserver()
     }
@@ -58,9 +63,30 @@ class RegisterFragment : Fragment() {
                 val password = edPasswordLogin.text.toString().trim()
                 val confirmPassword = edPasswordLoginConfirm.text.toString().trim()
 
-                val user = User(System.currentTimeMillis(),"user", name, email, password, confirmPassword, "")
+                if (type == "Librarian") {
+                    user = UserFactory.createUser(
+                        userType = UserType.LIBRARIAN,
+                        name = name,
+                        email = email,
+                        password = password,
+                        confirmPassword = confirmPassword,
+                        imagePath = ""
+                    )
 
-                createAccountWithEmailAndPass(user)
+                } else if (type == "Normal User") {
+                    user = UserFactory.createUser(
+                        userType = UserType.NORMAL_USER,
+                        name = name,
+                        email = email,
+                        password = password,
+                        confirmPassword = confirmPassword,
+                        imagePath = ""
+                    )
+                }
+
+                user?.let { it1 -> createAccountWithEmailAndPass(it1) }
+
+
             }
         }
 
@@ -120,7 +146,12 @@ class RegisterFragment : Fragment() {
                                 "Your account has been created, please login",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+                            val action = type?.let { it1 ->
+                                RegisterFragmentDirections.actionRegisterFragmentToLoginFragment(
+                                    it1
+                                )
+                            }
+                            findNavController().navigate(action!!)
                         }
 
                         is Resource.Error -> {
